@@ -29,7 +29,8 @@ body {
   justify-content: center;
   align-items: center;
   background: #ccceeb;
-  font-family: "Manrope", "Roboto", "Arial";
+  /* font-family: "Manrope", "Roboto", "Arial"; */
+  font-family: "Poppins";
   padding: 1em;
   gap: 1em;
 }
@@ -56,7 +57,7 @@ hr {
   min-width: var(--size);
   min-height: var(--size);
   position: relative;
-  background-image: url("https://i.imgur.com/TrT3LoO.jpg");
+  background-image: url("../image/man.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
