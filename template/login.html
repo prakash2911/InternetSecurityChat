@@ -13,12 +13,15 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <body>
 	<section class="login">
-		{% if msg %}
+		{% if msg  and not session%}
 			<div class="alert">
 				<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
 				{{msg}}
 			</div>
 		{% endif %}
+		{% if session and session['loggedin'] %}
+			windows.location.href = '/chat'
+		{%endif%}
 		<div class="login_box">
 			<div class="left">
 				<div class="contact">

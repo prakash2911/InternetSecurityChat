@@ -1,5 +1,5 @@
-from flask_mysqldb import *
-from flask import *
+from flask_mysqldb import MySQL
+from flask import request,redirect,render_template,session,Flask
 import MySQLdb.cursors
 
 app = Flask("__name__",template_folder="./template")
@@ -10,7 +10,6 @@ app.config['MYSQL_DB'] = 'chitchat'
 app.config['MYSQL_PORT'] = 3306
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-
 
 mysql = MySQL(app)
 
@@ -42,7 +41,12 @@ def page_not_found(e):
 @app.errorhandler(405)
 def page_not_found(e):
     return render_template('error.html',errmsg="Invalid Access")
-
+@app.route('/chat')
+def chat():
+    if session['loggedin']: 
+        return render_template('chat.html')
+    else:
+        return render_template('login.html',errmsg="Invalid Access")
 @app.route('/logout')
 def logout():
     session.pop('loggedin')
@@ -50,3 +54,5 @@ def logout():
     return redirect('/')
 if __name__== "__main__":
     app.run(host="0.0.0.0",debug=True)
+
+    # app.run()
