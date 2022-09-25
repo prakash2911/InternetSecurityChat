@@ -7,4 +7,4 @@ CREATE TABLE `chitchat`.`account` (
   PRIMARY KEY (`username`));
 
 INSERT INTO `chitchat`.`account` (`username`, `password`) VALUES ('prakash', '1234');
-    
+INSERT INTO `chitchat`.`account` (`username`, `password`) VALUES ('guru', '1234');

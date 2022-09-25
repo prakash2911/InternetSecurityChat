@@ -35,9 +35,18 @@ def loginsub():
         else:
             return render_template('login.html',msg = "Invalid username/password ")
     else:
-        return render_template('error.html',msg = "Oops !!!!😑😑Invalid access")
+        return render_template('login.html',msg = "😑😑 Enter the Username and password")
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('error.html')
+    return render_template('error.html',errmsg = "UH OH! You're lost.")
+@app.errorhandler(405)
+def page_not_found(e):
+    return render_template('error.html',errmsg="Invalid Access")
+
+@app.route('/logout')
+def logout():
+    session.pop('loggedin')
+    session.pop('name')
+    return redirect('/')
 if __name__== "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0",debug=True)

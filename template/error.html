@@ -270,11 +270,10 @@
       </div>
       <div class="col-md-6 align-self-center">
         <h1>Error!</h1>
-        <h2>UH OH! You're lost.</h2>
-        <h2 id="pageInfo"></h2>
-        {% if msg %}
-          <p>{{msg}}</p>
+        {% if errmsg %}
+          <h2>{{errmsg}}</h2>
         {% endif %}
+        <h2 id="pageInfo"></h2>
         <form action="/">
         <button class="btn green" href="{{url_for('login')}}">HOME</button></form>
       </div>
