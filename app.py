@@ -1,8 +1,11 @@
 from flask_mysqldb import MySQL
-from flask import request,redirect,render_template,session,Flask
+from flask import request,redirect,render_template,session,Flask,jsonify
 import MySQLdb.cursors
+# from flask_ngrok import run_with_ngrok
+
 
 app = Flask("__name__",template_folder="./template")
+# run_with_ngrok(app)
 app.secret_key = 'Tahve bqltuyej tbrjereq qobfd MvIaTq cmanmvpcuxsz iesh tihkel CnTu dretpyauritompeanstd '
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'admin'
@@ -12,6 +15,21 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 
 mysql = MySQL(app)
+@app.route('/register',methods=['POST'] )
+def register():
+    if not session and session['loggedin']:
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute(f"select * from account where username = '{username}' or email = '{email}'")
+        account = cursor.fetchall()
+        if account:
+            return render_template('login.html',errmsg="Username\email already exist")
+        else:
+            session['loggedin'] = True
+            session['name'] = username
+            return render_template('chat.html',errmsg="Successfully logged in")
 
 @app.route('/',methods=['POST','GET'])
 def login():
@@ -30,7 +48,17 @@ def loginsub():
         if account:
             session['loggedin'] = True
             session['name'] = username
-            return render_template('chat.html')
+            # query = f"select * from account where from = '{username}' and to = 'guru' order by time and date"
+            # cursor.execute(query)
+            # chatr = cursor.fetchall()
+            # msg = {}
+            # content = []
+            # if chatr:
+            #     msg =  {'time' : chatr['time'],'date' : chatr['date'] ,'msg' : chatr['msg']}
+            #     content.append(msg)
+            #     return render_template('chat.html',jsonify(content))
+            # else:
+            return render_template('chat.html',msg = 'Start new message')
         else:
             return render_template('login.html',msg = "Invalid username/password ")
     else:
