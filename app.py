@@ -3,7 +3,6 @@ from flask import request,redirect,render_template,session,Flask,jsonify
 import MySQLdb.cursors
 # from flask_ngrok import run_with_ngrok
 
-
 app = Flask("__name__",template_folder="./template")
 # run_with_ngrok(app)
 app.secret_key = 'Tahve bqltuyej tbrjereq qobfd MvIaTq cmanmvpcuxsz iesh tihkel CnTu dretpyauritompeanstd '
@@ -58,7 +57,7 @@ def loginsub():
             #     content.append(msg)
             #     return render_template('chat.html',jsonify(content))
             # else:
-            return render_template('chat.html',msg = 'Start new message')
+            return render_template('chat.html',msg = 'Start new message',g="hi how are you")
         else:
             return render_template('login.html',msg = "Invalid username/password ")
     else:

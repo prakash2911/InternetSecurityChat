@@ -61,7 +61,7 @@ send.addEventListener('click', () => {
 	const msg = input.value;
 	if(msg) sendMessage(msg);
 });
-
+/*important*/
 const sendMessage = (msg) => {
 	//Create message
 	const block = document.createElement('div');
@@ -81,11 +81,9 @@ const sendMessage = (msg) => {
 };
 
 // Getting current date
-
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, "0");
 var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
 var yyyy = today.getFullYear();
 today = dd + "/" +mm + "/" + yyyy;
 document.getElementById("date").innerText=today
-
